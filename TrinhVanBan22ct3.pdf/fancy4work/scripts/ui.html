@@ -1,0 +1,117 @@
+<div id="container" class="absolute font-sans text-base text-slate-700 inset-0 z-[999999] flex items-center justify-center bg-slate-100 p-4">
+    <div id="editor-ui" style="height: calc(100% - 60px);text-align:left;"
+        class="relative border-2 border-black flex w-full max-w-[700px] flex-col overflow-x-hidden overflow-y-auto rounded-lg bg-slate-50 p-4">
+        <div class="mb-2 flex shrink-0 flex-row items-center justify-between">
+            <button id="auto-wp-cancel-btn"
+                class="rounded-lg bg-slate-800 p-2 px-4 text-slate-100 hover:bg-black">Cancel</button>
+            <button id="auto-wp-post-btn"
+                class="rounded-lg bg-slate-800 p-2 px-4 text-slate-100 hover:bg-black">Post It</button>
+        </div>
+
+        
+        <div class="grow overflow-y-auto">
+            <h1 class="my-2 text-2xl font-extrabold">Image Preference</h1>
+            <div class="my-4">
+                
+                <div class="mb-2">
+                    <input name="image-pref" value="local" type="radio" checked
+                        id="image-pref-local">
+                    <label for="image-pref-local">Collage</label>
+                    <button id="shuffle-btn"
+                        style="overflow:hidden;background:black;padding:0px 10px;margin-left:5px;font-size:12px;color:white;border-radius:3px;width:100px;"
+                        disabled >
+                        Shuffle
+                    </button>
+                    <p class="text-slate-700 text-sm w-[500px] p-2">Choose at least 4 photos
+                      <input id="local-file-input" type="file" accept="image/png, image/jpeg, image/webp, image/avif" multiple="true">
+                    </p>
+                </div>
+
+                <div class="mb-2">
+                    <input name="image-pref" value="local-single" type="radio"
+                        id="image-pref-local-single">
+                    <label for="image-pref-local-single">Single</label>
+                    <p class="text-slate-700 text-sm w-[500px] p-2">Choose 1 photo
+                      <input id="local-single-file-input" disabled type="file" accept="image/png, image/jpeg, image/webp, image/avif">
+                    </p>
+                </div>
+
+            </div>
+
+            <h1 class="my-2 text-2xl font-extrabold">Facebook Preview</h1>
+            <div class="flex h-[350px] w-[500px] flex-col overflow-hidden rounded-xl bg-slate-100">
+                <div id="fb-preview-image" class="grow bg-cover bg-center"
+                    style="background-image:url(https://images.unsplash.com/photo-1493815793585-d94ccbc86df8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1673&q=80)">
+                </div>
+                <div class="m-2 h-[80px] shrink-0 overflow-hidden">
+                    <h2 class="line-clamp-1 text-sm font-semibold uppercase text-slate-400">storiesbus.vercel.app
+                    </h2>
+                    <h2 id="fb-preview-title" class="line-clamp-1 font-bold text-slate-700">Lorem ipsum dolor sit
+                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        magna</h2>
+                    <p id="fb-preview-excerpt" class="line-clamp-2 text-sm text-slate-400">Lorem ipsum dolor sit
+                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+            <p class="text-slate-700 text-sm w-[500px] p-2">Files: 
+              <a target="_blank" id="opengraph-image-file" style="margin-left:10ox;cursor:pointer;text-decoration: underline;">opengraph (1200x630)↗</a>
+              <a target="_blank" id="ads-image-file" style="margin-left:10px;cursor:pointer;text-decoration: underline;">ads (1080x1080)↗</a>
+            </p>
+
+            <h1 class="my-2 text-2xl font-extrabold">Categories</h1>
+            <p>If none is selected, default to Uncategorized.</p>
+            <div id="post-categories" class="mb-2 max-h-[200px] w-[500px] overflow-y-auto overflow-x-hidden">
+
+            </div>
+
+            <div class="my-4">
+                <div class="flex my-2 flex-row justify-between items-center">
+                    <h1 class="mb-2 text-2xl font-extrabold">Title</h1>
+                    <span id="copy-title-btn" style="width:120px;text-align:center;"
+                        class="cursor-pointer bg-slate-200 text-sm p-2 rounded-lg">copy raw text</span>
+                </div>
+                <textarea id="post-title"
+                    class="box-border h-[120px] w-full rounded border-2 border-black bg-slate-50 p-2 outline-none">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</textarea>
+            </div>
+
+            <div class="my-4">
+                <h1 class="mb-2 text-2xl font-extrabold">Post Content</h1>
+                <p class="">The style displayed here (font, size, alignment, etc.) doesn't matter. It will be
+                    reformatted into the WordPress theme after uploaded. <br />Just focus on <b>removing irrelevant
+                        text</b> (and sometimes images), cause the parser is not perfect.</p>
+
+                <div class="flex my-2 items-center" style="flex-direction:row-reverse;">
+                  <span id="copy-post-btn" style="width:120px;text-align:center;display:inline-block;"
+                    class="cursor-pointer bg-slate-200 my-2 text-sm p-2 rounded-lg">copy raw text</span>
+                </div>
+                <div id="post-content" class="my-2 overflow-auto rounded border-2 border-black p-2"
+                    style="border-style:solid;" spellcheck="false" contenteditable="true"></div>
+            </div>
+        </div>
+
+        <div id="processing" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-50/90">
+            <p class="font-mono">parsing...</p>
+            <div class="my-4">
+                <span class="loader"></span>
+            </div>
+        </div>
+        <div id="processed" style="display:none"
+            class="absolute inset-0 flex flex-col items-center justify-center bg-slate-50/90">
+            <p class="text-xl font-bold">Done ✓</p>
+            <a target="_blank" id="post-link"
+                class="mt-4 cursor-pointer rounded-lg bg-slate-800 p-2 px-4 text-slate-100 hover:bg-black">View the
+                post </a>
+        </div>
+
+        <div id="failed" style="display:none"
+            class="absolute inset-0 flex flex-col items-center justify-center bg-slate-50/90">
+            <h2 class="text-xl font-bold text-red-500">Error</h2>
+            <p class="max-w-[400px] overflow-hidden"></p>
+        </div>
+    </div>
+</div>
+
